@@ -41,7 +41,7 @@ namespace BaseCliente.Business
         {
             BancoRequestDto bancoRequestDto = new BancoRequestDto();
             bancoRequestDto.Nome = nome;
-            bancoRequestDto.IdBanco = "";
+            bancoRequestDto.IdBanco = idBanco;
 
             string jsonCliente = JsonConvert.SerializeObject(bancoRequestDto);
             HttpContent content = new StringContent(jsonCliente, Encoding.UTF8, "application/json");
@@ -121,8 +121,28 @@ namespace BaseCliente.Business
             var apiService = new ApiService();
             var httpClient = apiService.GetHttpClient();
 
-            CwCliente cwCliente = new CwCliente();
+            CwBanco cwBanco = null;
             HttpResponseMessage response = httpClient.PostAsync("banco/inserir", content).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                cwBanco = response.Content.ReadAsAsync<CwBanco>().GetAwaiter().GetResult();
+            }
+            else
+            {
+                throw new Exception($"Falha na chamada à API: {response.StatusCode}");
+            }
+            return cwBanco.Id;
+        }
+
+        internal bool ValidarVinculoCliente(string idBanco)
+        {
+            var apiService = new ApiService();
+            var httpClient = apiService.GetHttpClient();
+
+            var url = string.Format("banco/validarVinculoCliente/{0}", idBanco);
+
+            CwCliente cwCliente = null;
+            HttpResponseMessage response = httpClient.GetAsync(url).GetAwaiter().GetResult();
             if (response.IsSuccessStatusCode)
             {
                 cwCliente = response.Content.ReadAsAsync<CwCliente>().GetAwaiter().GetResult();
@@ -131,7 +151,7 @@ namespace BaseCliente.Business
             {
                 throw new Exception($"Falha na chamada à API: {response.StatusCode}");
             }
-            return cwCliente.Id;
+            return cwCliente != null;
         }
     }
 }

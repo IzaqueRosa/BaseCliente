@@ -24,8 +24,8 @@ namespace BaseCliente.Domain.Repositories
 
         public async Task<Banco> BuscarPorId(string idBanco)
         {
-            int id = int.Parse(idBanco);
-            return await _dbContext.Banco.FirstOrDefaultAsync(f => f.Id == id); ;
+            int _idBanco = int.Parse(idBanco);
+            return await _dbContext.Banco.FirstOrDefaultAsync(f => f.Id == _idBanco); ;
         }
 
         public async Task<List<Banco>> BuscarTodos()

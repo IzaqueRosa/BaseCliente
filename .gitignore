@@ -1,0 +1,11 @@
+# Arquivos de compilação
+bin/
+obj/
+
+# Arquivos de log e cache
+*.log
+*.vs/
+*.suo
+*.user
+*.cache
+*.vsidx

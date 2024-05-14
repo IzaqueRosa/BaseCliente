@@ -97,13 +97,20 @@ namespace BaseCliente.Pages
             {
                 if (!string.IsNullOrWhiteSpace(tbxCodigo.Text))
                 {
-                    if (Page.IsValid)
+                    if (new Banco().ValidarVinculoCliente(tbxCodigo.Text))
                     {
-                        new Banco().Excluir(tbxCodigo.Text);
-                    }
+                        if (Page.IsValid)
+                        {
+                            new Banco().Excluir(tbxCodigo.Text);
+                        }
 
-                    Response.Write("<script>alert('Exclusão realizada com sucesso!');</script>");
-                    LimparCampos();
+                        Response.Write("<script>alert('Exclusão realizada com sucesso!');</script>");
+                        LimparCampos();
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('O banco não pode ser excluído pois está vinculado a um cliente!');</script>");
+                    }
                 }
                 else
                 {

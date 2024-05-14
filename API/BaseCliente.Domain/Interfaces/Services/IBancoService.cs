@@ -11,5 +11,6 @@ namespace BaseCliente.Domain.Interfaces.Services
         List<BancoResponseDto> BuscarTodosComFiltro(string nome);
         Task Excluir(string idBanco);
         Task<Banco> Inserir(string nome);
+        Task<Cliente> ValidarVinculoCliente(string idBanco);
     }
 }

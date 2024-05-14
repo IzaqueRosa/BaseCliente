@@ -10,11 +10,12 @@ namespace BaseCliente.Domain.Services
     public class BancoService : IBancoService
     {
         private readonly IBancoRepository _bancoRepository;
-        
+        private readonly IClienteRepository _clienteRepository;
 
-        public BancoService(IBancoRepository bancoRepository, BaseClienteContext dbContext)
+        public BancoService(IBancoRepository bancoRepository, IClienteRepository clienteRepository)
         {
             _bancoRepository = bancoRepository;
+            _clienteRepository = clienteRepository;
         }
 
         public async Task<Banco> Alterar(string idBanco, string nome)
@@ -61,6 +62,11 @@ namespace BaseCliente.Domain.Services
             };
 
             return await _bancoRepository.Inserir(banco);
+        }
+
+        public async Task<Cliente> ValidarVinculoCliente(string idBanco)
+        {
+            return await _clienteRepository.ValidarVinculoBancoCliente(idBanco);
         }
     }
 }

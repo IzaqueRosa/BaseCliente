@@ -10,5 +10,6 @@ namespace BaseCliente.Domain.Interfaces.Repositories
         List<ClienteResponseDto> BuscarTodos(string nome, string idBanco);
         Task Excluir(Cliente cliente);
         Task<Cliente> Inserir(Cliente cliente);
+        Task<Cliente> ValidarVinculoBancoCliente(string idBanco);
     }
 }

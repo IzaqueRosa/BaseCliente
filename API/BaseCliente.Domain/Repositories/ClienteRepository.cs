@@ -24,8 +24,8 @@ namespace BaseCliente.Domain.Repositories
 
         public async Task<Cliente> BuscarPorId(string idCliente)
         {
-            int id = int.Parse(idCliente);
-            return await _dbContext.Cliente.FirstOrDefaultAsync(f => f.Id == id);
+            int _idCliente = int.Parse(idCliente);
+            return await _dbContext.Cliente.FirstOrDefaultAsync(f => f.Id == _idCliente);
         }
 
         public List<ClienteResponseDto> BuscarTodos(string nome, string idBanco)
@@ -63,6 +63,12 @@ namespace BaseCliente.Domain.Repositories
             await _dbContext.Cliente.AddAsync(cliente);
             await _dbContext.SaveChangesAsync();
             return cliente;
+        }
+
+        public async Task<Cliente> ValidarVinculoBancoCliente(string idBanco)
+        {
+            int _idBanco = int.Parse(idBanco);
+            return await _dbContext.Cliente.FirstOrDefaultAsync(f => f.IdBanco == _idBanco);
         }
     }
 }
