@@ -2,6 +2,7 @@
 using BaseClienteAPI.Extensions;
 using Microsoft.EntityFrameworkCore;
 using BaseCliente.Data.DataBase;
+using System.Reflection;
 
 namespace BaseClienteAPI
 {
@@ -35,6 +36,10 @@ namespace BaseClienteAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BaseCliente", Version = "v1" });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
