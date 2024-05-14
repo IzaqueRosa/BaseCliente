@@ -9,3 +9,7 @@ obj/
 *.user
 *.cache
 *.vsidx
+
+# Arquivos de build
+*.dll
+*.pdb
