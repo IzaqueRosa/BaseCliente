@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Cadastro.master.cs" Inherits="BaseCliente.Master.Cadastro" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - BaseCliente</title>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <link href="~/Style/Cadastro.css" rel="stylesheet" type="text/css" />
+    <link href="~/Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body>
+    <form id="form" runat="server">
+        <header>
+            <h1><%: Page.Title %></h1>
+        </header>
+        <main>
+            <div>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </main>
+
+        <footer>
+            <p>
+                Site desenvolvido por
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="https://www.linkedin.com/in/izaque-rosa/" Target="_blank">ZaqBr</asp:HyperLink>
+            </p>
+        </footer>
+    </form>
+
+</body>
+</html>
